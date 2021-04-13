@@ -6,7 +6,7 @@ const baseUrl = "https://image.tmdb.org/t/p/original/";
 export type RowPropTypes = {
   title: string;
   fetchUrl: string;
-  isLargeRow: boolean | null;
+  isLargeRow: boolean;
 };
 
 function Row({ title, fetchUrl, isLargeRow }: RowPropTypes) {
@@ -20,13 +20,15 @@ function Row({ title, fetchUrl, isLargeRow }: RowPropTypes) {
   }, [fetchUrl]);
 
   return (
-    <div className="row">
+    <div className={styles.row}>
       <h2>{title}</h2>
       <div className={styles.row__posters}>
         {movies.map((movie: any) => (
           <img
             key={movie.id}
-            className={styles.row__poster}
+            className={
+              isLargeRow ? styles.row__posterLarge : styles.row__poster
+            }
             src={`${baseUrl}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
