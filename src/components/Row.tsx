@@ -6,11 +6,11 @@ const baseUrl = "https://image.tmdb.org/t/p/original/";
 export type RowPropTypes = {
   title: string;
   fetchUrl: string;
+  isLargeRow: boolean | null;
 };
 
-function Row({ title, fetchUrl }: RowPropTypes) {
+function Row({ title, fetchUrl, isLargeRow }: RowPropTypes) {
   const [movies, setMovies] = useState<any>([]);
-
   useEffect(() => {
     const getMovies = async () => {
       const request = await instance.get(fetchUrl);
@@ -18,8 +18,6 @@ function Row({ title, fetchUrl }: RowPropTypes) {
     };
     getMovies();
   }, [fetchUrl]);
-
-  console.table(movies);
 
   return (
     <div className="row">
@@ -29,7 +27,9 @@ function Row({ title, fetchUrl }: RowPropTypes) {
           <img
             key={movie.id}
             className={styles.row__poster}
-            src={`${baseUrl}${movie.poster_path}`}
+            src={`${baseUrl}${
+              isLargeRow ? movie.poster_path : movie.backdrop_path
+            }`}
             alt={movie.name}
           />
         ))}
