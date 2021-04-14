@@ -52,6 +52,13 @@ function Banner() {
           {truncate(movie?.overview, 250)}
         </h1>
       </div>
+      <div
+        style={{
+          height: "7.4rem",
+          backgroundImage:
+            "linear-gradient(180deg, transparent, rgba(37,37,37,0.61), #111)",
+        }}
+      />
     </header>
   );
 }
